@@ -4,7 +4,7 @@ Le problème du postier chinois est un problème de théorie des graphes.
 
 L'objectif est de **trouver le chemin le plus court dans un fraphe qui passe par toutes les arêtes au moins une fois et revient au point de départ**.
 
-![alt text](image.png)
+![alt text](img/image.png)
 
 Les étapes de l'algorithme sont les suivantes :
 
