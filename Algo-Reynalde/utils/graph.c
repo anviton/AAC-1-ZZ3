@@ -14,7 +14,7 @@ void init_graph(graph_t * g, int num_nodes)
     }
 }
 
-void add_edges(graph_t * g, int u, int v, int weight)
+void add_edges_to_graph(graph_t * g, int u, int v, int weight)
 {
     g->matrix[u][v] = weight;
     g->matrix[v][u] = weight;

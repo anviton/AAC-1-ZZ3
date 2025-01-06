@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdbool.h>
+
 #include "chinese_postman.h"
-#include "graph.h"
 
 void find_eulerian_circuit(graph_t * g)
 {
@@ -10,7 +10,7 @@ void find_eulerian_circuit(graph_t * g)
     int ssize = 0;
     int csize = 0;
 
-    graph_t * temp = *g;
+    graph_t temp = *g;
 
     int curr = -1;
 
@@ -43,7 +43,7 @@ void find_eulerian_circuit(graph_t * g)
         int next = -1;
         for (int i = 0; i < temp.num_nodes; i++)
         {
-            if (temp.matrix[current][i] > 0)
+            if (temp.matrix[curr][i] > 0)
             {
                 next = i;
                 break;
