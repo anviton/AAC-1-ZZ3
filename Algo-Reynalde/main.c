@@ -1,6 +1,8 @@
+#include <limits.h>
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <math.h>
 
 #include "utils/graph.h"
 #include "src/chinese_postman.h"
@@ -14,13 +16,13 @@ void read_graph_from_file(graph_t *g, const char *filename) {
 
     char line[256];
     while (fgets(line, sizeof(line), file)) {
-        int u, v, weight = 1; 
-        if (strchr(line, ':')) 
+        int u, v, weight = 1;
+        if (strchr(line, ':'))
         {
             // i->j:weight
             sscanf(line, "%d->%d:%d", &u, &v, &weight);
         } else {
-            // i->j:1 (wieght is 1 by default)
+            // i->j:1 (weight is 1 by default)
             sscanf(line, "%d->%d", &u, &v);
         }
         add_edges_to_graph(g, u, v, weight);
@@ -50,23 +52,24 @@ void export_to_dot(const graph_t *g, const char *filename) {
     fprintf(file, "}\n");
 
     fclose(file);
-    printf("Graphe exporté dans le fichier DOT : %s\n", filename);
+    printf("Graph exported to DOT file: %s\n", filename);
 }
 
+
+
 int main() {
-    const char *input_file = "examples/graph-1.txt";
+    const char *input_file = "../examples/graph.txt";
     const char *output_file = "graph.dot";
 
+    int n = 5;
     graph_t g;
-    init_graph(&g, MAX_NODES);
-
-
+    init_graph(&g, n);
     read_graph_from_file(&g, input_file);
-
-    export_to_dot(&g, output_file);
-
     printf("Utilisez la commande suivante pour générer une image DOT :\n");
     printf("dot -Tpng %s -o examples/graph-1.png\n", output_file);
+    print_matrix(&g);
+
+    solve_chinese_postman(&g);
 
     return 0;
 }
