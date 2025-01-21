@@ -146,7 +146,7 @@ int *fleury_algorithm(graph_t *g) {
         // printf("stack[top-1] = %d\n", stack[top-1]);
         int u = stack[--top];
         for (int v = 0; v < g->num_nodes; v++){
-            if (g->matrix[u][v] > 0 && g->matrix[u][v] != INT_MAX && visited[v] != 1) {
+            if (g->matrix[u][v] > 0 && g->matrix[u][v] != INT_MAX) {
                 printf("Matrix[%d][%d] = %d\n", u, v, g->matrix[u][v]);
                 visited[u] = 1;
                 stack[top++] = v;

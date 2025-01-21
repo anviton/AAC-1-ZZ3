@@ -61,10 +61,11 @@ int main() {
     const char *input_file = "../examples/graph.txt";
     const char *output_file = "graph.dot";
 
-    int n = 5;
+    int n = 4;
     graph_t g;
     init_graph(&g, n);
     read_graph_from_file(&g, input_file);
+    export_to_dot(&g, output_file);
     printf("Utilisez la commande suivante pour générer une image DOT :\n");
     printf("dot -Tpng %s -o examples/graph-1.png\n", output_file);
     print_matrix(&g);
