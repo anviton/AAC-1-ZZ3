@@ -1,39 +1,20 @@
-# Compilateur et options
-CC = gcc
-CFLAGS = -Wall -Wextra
-LDFLAGS =
+CXX = g++
+CXXFLAGS = -std=c++17 -Wall -Wextra -O2
 
-# Répertoires
-SRC_DIR = src
-UTILS_DIR = utils
-BIN_DIR = bin
+TARGET = postier_chinois
+SRCS = main.cpp graph.cpp file_reader.cpp
+OBJS = $(SRCS:.cpp=.o)
+DEPS = graph.h file_reader.h
 
-# Fichiers sources
-SRC_FILES = main.c $(SRC_DIR)/chinese_postman.c $(UTILS_DIR)/graph.c
-OBJ_FILES = $(SRC_FILES:.c=.o)
-
-# Nom de l'exécutable
-TARGET = $(BIN_DIR)/program
-
-# Règle par défaut
 all: $(TARGET)
 
-# Compilation de l'exécutable
-$(TARGET): $(OBJ_FILES) | $(BIN_DIR)
-	$(CC) $(OBJ_FILES) -o $@ $(LDFLAGS)
+$(TARGET): $(OBJS)
+	$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJS)
 
-# Compilation des fichiers objets
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+%.o: %.cpp $(DEPS)
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-# Crée le répertoire bin s'il n'existe pas
-$(BIN_DIR):
-	mkdir -p $(BIN_DIR)
-
-# Nettoyage des fichiers générés
 clean:
-	rm -rf $(OBJ_FILES) $(TARGET)
+	rm -f $(OBJS) $(TARGET)
 
-# Nettoyage complet
-dist-clean: clean
-	rm -rf $(BIN_DIR)
+.PHONY: all clean
